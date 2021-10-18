@@ -1,0 +1,24 @@
+<header>
+    <div class="user-controller">
+        <p id="username-label"></p>
+        <div id="username-div">
+            <input type="text" id="username">
+            <button class="username-btn" onclick="changeUsername()">Change username</button>
+        </div>
+    </div>
+
+    <div class="controller">
+        <button class="control-btn disable-btn" onclick="toggleMicrophone(this)">Open microphone</button>
+        <button class="control-btn disable-btn" onclick="toggleMute(this)">Mute</button>
+        <button class="control-btn disable-btn" onclick="toggleConnection(this)">Go online</button>
+    </div>
+
+</header>
+<h2>users list</h2>
+<ul class="users" id="users">
+
+
+</ul>
+
+<script src="/files/js/index.js"></script>
+<link rel="stylesheet" href="/files/css/index.css">
