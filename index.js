@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 3000
 const handlebars = require("express-handlebars");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -55,6 +56,6 @@ io.on("connection", function (socket) {
 });
 
 
-http.listen(3000, () => {
+http.listen(port, () => {
   console.log("the app is run in port 3000!");
 });
