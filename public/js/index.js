@@ -17,8 +17,9 @@ const userStatus = {
   window.onload = (e) => {
     mainFunction(1000);
   };
-  
-  var socket = io("ws://localhost:3000");
+
+  var socket = io.connect('https://cn-voip-app.herokuapp.com/', {secure: true});
+
   socket.emit("userInformation", userStatus);
   
   
