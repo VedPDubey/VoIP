@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 8080
+const port = 8080
 const handlebars = require("express-handlebars");
 const http = require("http").Server(app);
 // const io = require("socket.io")(http);
