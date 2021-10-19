@@ -17,7 +17,7 @@ app.set("view engine", "handlebars");
 //enable user access to public folder 
 app.use("/files", express.static("public"));
 
-app.get("/home" , (req , res)=>{
+app.get("/" , (req , res)=>{
     res.render("index");
 });
 
