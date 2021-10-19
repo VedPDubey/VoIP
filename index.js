@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 const handlebars = require("express-handlebars");
 const http = require("http").Server(app);
 // const io = require("socket.io")(http);
-
+const io = require("socket.io")(http)
 //To holding users information 
 const socketsStatus = {};
 
@@ -13,20 +13,19 @@ const customHandlebars = handlebars.create({ layoutsDir: "./views" });
 
 app.engine("handlebars", customHandlebars.engine);
 app.set("view engine", "handlebars");
-app.use(require('cors')())
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+  next();
+});
 //enable user access to public folder 
 app.use("/files", express.static("public"));
 
 app.get("/" , (req , res)=>{
     res.render("index");
 });
-
-const io = require("socket.io")(http, {
-  cors: {
-      origin: "localhost:3000",
-      methods: ["GET", "POST"]
-  }
-})
 
 io.on("connection", function (socket) {
   const socketId = socket.id;
