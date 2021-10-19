@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000
 const handlebars = require("express-handlebars");
 const http = require("http").Server(app);
-const io = require("socket.io")(http);
+// const io = require("socket.io")(http);
 
 //To holding users information 
 const socketsStatus = {};
@@ -13,13 +13,20 @@ const customHandlebars = handlebars.create({ layoutsDir: "./views" });
 
 app.engine("handlebars", customHandlebars.engine);
 app.set("view engine", "handlebars");
-
+app.use(require('cors')())
 //enable user access to public folder 
 app.use("/files", express.static("public"));
 
 app.get("/" , (req , res)=>{
     res.render("index");
 });
+
+const io = require("socket.io")(http, {
+  cors: {
+      origin: "localhost:3000",
+      methods: ["GET", "POST"]
+  }
+})
 
 io.on("connection", function (socket) {
   const socketId = socket.id;
@@ -57,5 +64,5 @@ io.on("connection", function (socket) {
 
 
 http.listen(port, () => {
-  console.log("the app is run in port 3000!");
+  console.log("The App is successfully Running!");
 });
